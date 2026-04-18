@@ -1,0 +1,7 @@
+Back/venv/
+Back/.env
+Back/__pycache__/
+Back/*.pyc
+Back/*.pyo
+Back/data/
+Back/artifacts/
