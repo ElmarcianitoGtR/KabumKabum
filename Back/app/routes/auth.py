@@ -2,6 +2,7 @@ from fastapi import APIRouter, HTTPException, status, Depends, Request
 from fastapi.security import OAuth2PasswordRequestForm
 from pydantic import BaseModel, EmailStr
 from datetime import datetime
+from typing import Optional
 from app.models.models import User, UserRole
 from app.core.security import (
     hash_password, verify_password,
@@ -9,50 +10,55 @@ from app.core.security import (
     get_current_user,
 )
 from app.services.solana_service import store_credentials_on_chain, verify_credentials_on_chain
-
+ 
 router = APIRouter(prefix="/auth", tags=["Autenticación"])
-
-
+ 
+ 
 # ─────────────────────────────────────────────────
 #  SCHEMAS
 # ─────────────────────────────────────────────────
 class RegisterRequest(BaseModel):
-    name:     str
-    email:    EmailStr
-    password: str
-    role:     UserRole = UserRole.READER
-
-
+    name:             str
+    email:            EmailStr
+    password:         str
+    confirm_password: str        # ← confirmar contraseña
+    role:             UserRole = UserRole.READER
+ 
+ 
 class TokenResponse(BaseModel):
     access_token:  str
     refresh_token: str
     token_type:    str = "bearer"
     role:          str
-
-
+ 
+ 
 class RefreshRequest(BaseModel):
     refresh_token: str
-
-
+ 
+ 
 # ─────────────────────────────────────────────────
 #  REGISTRO
 # ─────────────────────────────────────────────────
 @router.post("/register", status_code=201)
 async def register(data: RegisterRequest):
+    # Verificar que las contraseñas coincidan
+    if data.password != data.confirm_password:
+        raise HTTPException(status_code=400, detail="Las contraseñas no coinciden")
+ 
     # Verificar que el email no exista
     existing = await User.find_one(User.email == data.email)
     if existing:
         raise HTTPException(status_code=400, detail="El email ya está registrado")
-
+ 
     hashed = hash_password(data.password)
-
+ 
     # Guardar hash + rol en Solana (on-chain)
     solana_pubkey = await store_credentials_on_chain(
         email=data.email,
         hashed_password=hashed,
         role=data.role.value,
     )
-
+ 
     # Guardar perfil completo en MongoDB
     user = User(
         name=data.name,
@@ -61,16 +67,21 @@ async def register(data: RegisterRequest):
         role=data.role,
         solana_public_key=solana_pubkey,
     )
-    await user.insert()
-
+    try:
+        await user.insert()
+        print(f"✅ Usuario guardado en MongoDB: {user.email}")
+    except Exception as e:
+        print(f"❌ Error guardando en MongoDB: {e}")
+        raise HTTPException(status_code=500, detail=f"Error guardando usuario: {e}")
+ 
     return {
         "message": "Usuario registrado correctamente",
         "email":   user.email,
         "role":    user.role,
         "solana":  solana_pubkey,
     }
-
-
+ 
+ 
 # ─────────────────────────────────────────────────
 #  LOGIN
 # ─────────────────────────────────────────────────
@@ -79,11 +90,11 @@ async def login(form: OAuth2PasswordRequestForm = Depends()):
     user = await User.find_one(User.email == form.username)
     if not user or not user.is_active:
         raise HTTPException(status_code=401, detail="Credenciales incorrectas")
-
+ 
     # 1) Verificar password localmente con bcrypt
     if not verify_password(form.password, user.hashed_password):
         raise HTTPException(status_code=401, detail="Credenciales incorrectas")
-
+ 
     # 2) Verificar on-chain en Solana que el hash coincide
     valid_on_chain = await verify_credentials_on_chain(
         email=user.email,
@@ -91,11 +102,11 @@ async def login(form: OAuth2PasswordRequestForm = Depends()):
     )
     if not valid_on_chain:
         raise HTTPException(status_code=401, detail="Verificación blockchain fallida")
-
+ 
     # 3) Actualizar último login
     user.last_login = datetime.utcnow()
     await user.save()
-
+ 
     # 4) Emitir tokens JWT con el rol embebido
     token_data = {"sub": user.email, "role": user.role.value}
     return TokenResponse(
@@ -103,8 +114,8 @@ async def login(form: OAuth2PasswordRequestForm = Depends()):
         refresh_token = create_refresh_token(token_data),
         role          = user.role.value,
     )
-
-
+ 
+ 
 # ─────────────────────────────────────────────────
 #  REFRESH TOKEN
 # ─────────────────────────────────────────────────
@@ -113,19 +124,19 @@ async def refresh(body: RefreshRequest):
     payload = decode_token(body.refresh_token)
     if payload.get("type") != "refresh":
         raise HTTPException(status_code=401, detail="Token de refresco inválido")
-
+ 
     user = await User.find_one(User.email == payload.get("sub"))
     if not user or not user.is_active:
         raise HTTPException(status_code=401, detail="Usuario no encontrado")
-
+ 
     token_data = {"sub": user.email, "role": user.role.value}
     return TokenResponse(
         access_token  = create_access_token(token_data),
         refresh_token = create_refresh_token(token_data),
         role          = user.role.value,
     )
-
-
+ 
+ 
 # ─────────────────────────────────────────────────
 #  PERFIL ACTUAL
 # ─────────────────────────────────────────────────

@@ -9,6 +9,8 @@ from app.core.database import connect_db, disconnect_db
 from app.middleware.security import register_middlewares
 from app.routes import auth, reactor, chat
 from app.services.inference_pipeline import load_artifacts
+from app.services.umap_service import load_umap_artifacts
+from app.routes import umap
 
 settings     = get_settings()
 CSV_PATH     = "data/data_limpia.csv"
@@ -51,6 +53,13 @@ async def lifespan(app: FastAPI):
 
     yield
 
+    # 3) Cargar UMAP
+    try:
+        load_umap_artifacts()
+        print("✅ UMAP embedding cargado")
+    except Exception as e:
+        print(f"⚠️ Error cargando UMAP: {e}")
+
     # ── SHUTDOWN ──────────────────────────────────
     await disconnect_db()
     print("👋 ReactorGuard API detenida")
@@ -74,6 +83,7 @@ register_middlewares(app)
 app.include_router(auth.router)
 app.include_router(reactor.router)
 app.include_router(chat.router)
+app.include_router(umap.router)
 
 
 # ─────────────────────────────────────────────────
