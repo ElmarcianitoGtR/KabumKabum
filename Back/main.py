@@ -1,3 +1,23 @@
+import sys
+import types
+
+# --- MONKEY PATCH PRO PARA PYTHON 3.13 ---
+if 'imp' not in sys.modules:
+    fake_imp = types.ModuleType('imp')
+    sys.modules['imp'] = fake_imp
+    
+    # Mockeamos find_module para que no truene
+    def find_module(name, path=None):
+        # Engañamos a skfuzzy diciéndole que no encontramos 'nose'
+        # Esto es seguro porque 'nose' es solo para tests
+        raise ImportError(f"No module named {name}")
+    
+    fake_imp.find_module = find_module
+    print("🛠️  Patch Pro aplicado: 'imp.find_module' emulado.")
+# -----------------------------------------
+    
+
+
 from fastapi import FastAPI, HTTPException
 from contextlib import asynccontextmanager
 import pandas as pd
