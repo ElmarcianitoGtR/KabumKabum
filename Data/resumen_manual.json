@@ -1,0 +1,43 @@
+{
+  "riesgos": [
+    "Radiación ionizante",
+    "Desviaciones del funcionamiento normal",
+    "Fallos operacionales",
+    "Accidentes",
+    "Accidentes severos",
+    "Ciberataque",
+    "Inyecciones de comandos en protocolos industriales",
+    "Fallos"
+  ],
+  "protocolos": [
+    "Implementación de múltiples capas de protección independientes",
+    "Prevención de desviaciones del funcionamiento normal mediante diseño robusto y construcción de alta calidad",
+    "Control de fallos operacionales y detección de desviaciones",
+    "Uso de sistemas de seguridad para controlar accidentes y limitar sus consecuencias",
+    "Gestión de accidentes severos para mitigar las consecuencias externas",
+    "Seguir estrictamente los procedimientos de operación (SOP) para cambios en el estado del núcleo",
+    "Monitorizar de forma redundante los parámetros críticos del reactor",
+    "Inserción total de barras de control si el Flujo Neutrónico > 115% nominal",
+    "Apertura de válvulas de alivio si la Presión del Primario > 15.5 MPa",
+    "Parada de emergencia (Trip) si el Nivel de Presurizador < 15% o > 90%",
+    "Aplicar el principio ALARA (As Low As Reasonably Achievable)",
+    "Aumentar la distancia a la fuente de radiación",
+    "Minimizar el tiempo de permanencia en zonas controladas",
+    "Uso de plomo, hormigón o agua para atenuar la radiación",
+    "Aislar físicamente los sistemas de control del reactor de la red corporativa e Internet",
+    "Requerir una arquitectura de capas (Modelo Purdue) para proteger los PLC",
+    "Implementar sistemas de monitorización de red que utilicen análisis de comportamiento para detectar anomalías",
+    "Utilizar algoritmos de aprendizaje automático para analizar series temporales de sensores",
+    "Generar alertas de mantenimiento inmediatas por desviaciones estadísticas del 'gemelo digital'",
+    "Revisar el manual anualmente y tras cada simulacro de emergencia"
+  ],
+  "emergencias": [
+    "Planes de emergencia externa y protección civil",
+    "Activación del Plan de Emergencia Interior (PEI)",
+    "Clasificación del evento (Notificación, Emergencia en el emplazamiento, Emergencia general)",
+    "Activación del Centro de Apoyo Técnico (TSC)",
+    "Coordinación con autoridades nacionales de seguridad nuclear",
+    "Protocolos de evacuación y profilaxis radiológica (distribución de tabletas de yoduro de potasio)"
+  ],
+  "nivel_riesgo": "crítico"
+}

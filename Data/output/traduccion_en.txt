@@ -1,0 +1,52 @@
+Comprehensive Safety Manual for Nuclear Power Plants (CSM-NPP)
+
+This document constitutes the regulatory and operational safety framework for the management of nuclear power generation facilities. Its objective is to guarantee the protection of workers, the public, and the environment against the risks of ionizing radiation and to ensure the integrity of industrial processes.
+
+1. Safety Philosophy and Defense in Depth
+Nuclear safety is based on the principle of Defense in Depth, which consists of the implementation of multiple independent layers of protection.
+● Level 1: Prevention of deviations from normal operation through robust design and high-quality construction.
+● Level 2: Control of operational failures and detection of deviations to prevent them from escalating into incidents.
+● Level 3: Safety systems designed to control accidents and limit their consequences within the plant.
+● Level 4: Management of severe accidents to mitigate external consequences.
+● Level 5: External emergency plans and civil protection.
+
+2. Reactor Operation and Control Protocols
+Reactivity control is fundamental. Standard Operating Procedures (SOPs) must be strictly followed for any change in the core's state.
+
+2.1 Emergency Shutdown Systems (SCRAM)
+The Reactor Protection System (RPS) must redundantly monitor critical parameters. The trip logic is detailed below:
+
+Parameter Safety Threshold Automatic Action
+Neutron Flux > 115% nominal Full insertion of control rods
+Primary Pressure > 15.5 MPa Emergency shutdown (Trip)
+Pressurizer Level < 15% or > 90% Emergency shutdown (Trip)
+
+3. Radiological Protection
+The ALARA principle (As Low As Reasonably Achievable) is applied. All exposure must be justified, optimized, and limited.
+● Distance: Increasing the distance from the source reduces the dose according to the inverse square law.
+● Time: Minimize the time spent in controlled areas.
+● Shielding: Use of lead, concrete, or water to attenuate radiation.
+
+4. Cybersecurity and Digital Infrastructure Protection
+Given the digitalization of instrumentation and control (I&C) systems, logical security is as critical as physical security.
+
+4.1 Network Segmentation and Air-Gap
+Reactor control systems must be physically isolated from the corporate network and the Internet. A layered architecture (Purdue Model) is required to protect Programmable Logic Controllers (PLCs).
+
+4.2 Monitoring and Intrusion Detection
+Implementation of network monitoring systems that use behavioral analysis to detect anomalies that may indicate a cyberattack, such as command injections in industrial protocols (Modbus, Profibus).
+
+5. Data Analysis and Predictive Maintenance
+The use of advanced data science techniques allows anticipating failures before they occur.
+
+5.1 Anomaly Modeling
+Utilization of machine learning algorithms to analyze time series data from vibration sensors in turbines and cooling pumps. Statistical deviations from the plant's "digital twin" must generate immediate maintenance alerts.
+
+6. Emergency Response Plan
+In the event of an incident that exceeds containment barriers, the Internal Emergency Plan (PEI) will be activated.
+1. Event classification (Notification, On-site Emergency, General Emergency).
+2. Activation of the Technical Support Center (TSC).
+3. Coordination with national nuclear safety authorities.
+4. Evacuation and radiological prophylaxis protocols (distribution of potassium iodide tablets).
+
+This manual must be reviewed annually and after each emergency drill to incorporate lessons learned.

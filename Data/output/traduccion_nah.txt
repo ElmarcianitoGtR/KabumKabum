@@ -1,0 +1,52 @@
+Manual de Netlapializtli Ixtlapal ipampa Tepozcalli Yollotl (MSI-CN)
+
+Inin tlatolamatl chihua in ixtlapal tlanahuatilli ihuan netlapializtli tlanahuatilli ipampa in tepozcalli tlen chihua chicahualiztli yollotl. Icel tlamaniliztli inin tlatolamatl pia in netlapializtli in tequitqui, in macehualtin ihuan in tlalticpactli ixpan in ouihcayotl radiación ionizante ihuan pia in ixtlapaliztli in tlachihualiztli industrial.
+
+1. Filosofía de Netlapializtli ihuan Defensa en Profundidad
+In netlapializtli yollotl motlalia ipan in tlanahuatilli Defensa en Profundidad, tlen chihua miac tlatlapal netlapializtli ahmo cehuan.
+● Nivel 1: Tlacahualiztli ahcuallotl in tlachihualiztli normal ipan ce diseño chicahuac ihuan ce tlachihualiztli cualli hueyi.
+● Nivel 2: Tlapializtli ahcuallotl tlachihualiztli ihuan tlachializtli ahcuallotl ipampa tlacahua ma ahmo mochihua incidentes.
+● Nivel 3: Tepozmej netlapializtli chihualtin ipampa pia accidentes ihuan tlacahua in ixtlamachiliztli ipan in tepozcalli.
+● Nivel 4: Pia accidentes hueyi ipampa tlacahua in ixtlamachiliztli quiza.
+● Nivel 5: Planes emergencia quiza ihuan netlapializtli civil.
+
+2. Tlanahuatilli de Operación ihuan Pia in Yollotl
+Pia reactividad in hueyi. Monequi tlaneltoca tlanahuatilli tlachihualiztli (SOP) ipampa nochi tlacuepaliztli ipan in ixtlamachiliztli in yollotl.
+
+2.1 Tepozmej Tlacahualiztli Emergencia (SCRAM)
+In tepoztli netlapializtli in yollotl (RPS) monequi tlapia miacpa in parámetros ouihcayotl. In lógica disparo motlalia nican tlani:
+
+Parámetro Umbral de Netlapializtli Acción Automática
+Flujo Neutrónico > 115% nominal Tlacalaquiliztli barras de control
+Presión del Primario > 15.5 MPa Tlapohuiliztli válvulas de alivio
+Nivel de Presurizador < 15% o > 90% Tlacahualiztli emergencia (Trip)
+
+3. Netlapializtli Radiológica
+Mochihua in tlanahuatilli ALARA (As Low As Reasonably Achievable). Nochi exposición monequi tlacahualiztli, tlen hueli mochihua ipan tlamachiliztli.
+● Distancia: Tlahueyi in distancia in ixtlapal tlacahua in dosis ipan in ley inverso del cuadrado.
+● Tiempo: Tlacahua in tiempo tlen nemi ipan zonas tlapializtli.
+● Blindaje: Tlachihualli plomo, hormigón o atl ipampa tlacahua in radiación.
+
+4. Ciberseguridad ihuan Netlapializtli Infraestructuras Digitales
+Ipan in digitalización in tepozmej instrumentación ihuan tlapializtli (I&C), in netlapializtli lógica in ouihcayotl iuhqui in física.
+
+4.1 Segmentación de Red ihuan Air-Gap
+In tepozmej tlapializtli in yollotl monequi ahmo cehuan física in red corporativa ihuan Internet. Monequi ce arquitectura tlatlapal (Modelo Purdue) ipampa pia in Controladores Lógicos Programables (PLC).
+
+4.2 Tlapializtli ihuan Tlachializtli Intrusiones
+Tlachihualiztli tepozmej tlapializtli red tlen chihua tlayolteohuiliztli tlamaniliztli ipampa tlachia ahcuallotl tlen hueli quihtoa ce ciberataque, iuhqui inyecciones comandos ipan tlanahuatilli industriales (Modbus, Profibus).
+
+5. Tlayolteohuiliztli Tlapohualiztli ihuan Mantenimiento Predictivo
+In tlachihualiztli técnicas hueyi ciencia de datos hueli mati ahcuallotl achto ma mochihua.
+
+5.1 Modelado Ahcuallotl
+Tlachihualiztli tlayolteohuiliztli tepozixtlamatiliztli ipampa mati series temporales tepozmej vibración ipan turbinas ihuan bombas cehualiztli. In ahcuallotl estadísticas ipan in "gemelo digital" in tepozcalli monequi chihua alertas mantenimiento niman.
+
+6. Plan Respuesta ixpan Emergencias
+Quema mochihua ce evento tlen panohua in barreras contención, mochihua in Plan de Emergencia Interior (PEI).
+1. Clasificación in evento (Notificación, Emergencia ipan in tlalli, Emergencia ixtlapal).
+2. Tlachihualiztli in Centro de Apoyo Técnico (TSC).
+3. Coordinación ihuan tepantlatoani tlen tlalli netlapializtli yollotl.
+4. Tlanahuatilli evacuación ihuan profilaxis radiológica (tlacempanahuiliztli tabletas yoduro de potasio).
+
+Inin Manual monequi tlachia ce xihuitl ihuan quema mochihua nochi simulacro emergencia ipampa tlatlalia tlen momachtia.
